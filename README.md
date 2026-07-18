@@ -22,43 +22,8 @@ This lab uses Wireshark to capture live network traffic and walks through four c
 
 ## Architecture
 
-```
-                         ┌──────────────┐
-                         │   Internet   │
-                         └──────┬───────┘
-                                │
-        ┌───────────────────────────────────────────┐
-        │  Network in transit — untrusted segment     │
-        │              ┌───────────────┐              │
-        │              │ Router/Switch │              │
-        │              └───────┬───────┘              │
-        └──────────────────────┼─────────────────────┘
-                                │
-   ┌────────────────────────────────────────────────────┐
-   │  Local Machine — trust boundary                     │
-   │                                                     │
-   │         ┌───────────────────────────┐               │
-   │         │  Network Interface (NIC)  │               │
-   │         │  Promiscuous mode enabled │               │
-   │         └─────────────┬─────────────┘               │
-   │                       │                              │
-   │         ┌─────────────▼─────────────┐               │
-   │         │ Wireshark Capture Engine  │               │
-   │         │ Records every frame       │               │
-   │         └─────────────┬─────────────┘               │
-   │                       │                              │
-   │         ┌─────────────▼─────────────┐               │
-   │         │     Display Filters       │               │
-   │         │  dns · tcp · http · ip     │               │
-   │         └──────┬──────────┬─────────┘               │
-   │                │          │                          │
-   │      ┌─────────▼──┐ ┌─────▼──────┐ ┌───────────────┐│
-   │      │ DNS Query/  │ │TCP Handshake│ │ HTTP Cleartext││
-   │      │ Response    │ │SYN→SYN-ACK  │ │⚠ Credentials  ││
-   │      │ A records   │ │   →ACK      │ │   exposed     ││
-   │      └────────────┘ └────────────┘ └───────────────┘│
-   └────────────────────────────────────────────────────┘
-```
+<img width="2720" height="1440" alt="wireshark_lab_architecture" src="https://github.com/user-attachments/assets/4fb3ecd8-3e0b-46ac-8358-157bbdf3cc7f" />
+
 
 **Trust boundary:** Traffic crosses an untrusted network segment (internet, router) before reaching the local machine's NIC. Once inside the trust boundary, the NIC in promiscuous mode hands every frame to Wireshark, which stores the full capture and lets display filters slice it into the views needed for analysis — without ever discarding the underlying data.
 
