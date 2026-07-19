@@ -188,6 +188,9 @@ Each exercise builds on the previous one and teaches a specific real-world analy
 6. Click the POST packet → find the **HTML Form URL Encoded** layer in the detail pane
 7. The username and password appear in plaintext
 
+<img width="529" height="353" alt="Screenshot 2026-07-15 at 01 05 50" src="https://github.com/user-attachments/assets/bf2b0dac-789d-4fc5-90b4-2a1cdec928f9" />
+
+
 > This is the concrete reason every login form must use HTTPS. Without TLS, anyone on the network path — an ISP, a coffee shop router, an attacker performing a man-in-the-middle — can read credentials exactly as typed. This is how security teams prove the vulnerability exists to developers who resist adding HTTPS.
 
 ### Exercise D — Follow a Full TCP Stream
@@ -195,7 +198,13 @@ Each exercise builds on the previous one and teaches a specific real-world analy
 1. Capture traffic while navigating to any HTTP website
 2. Find any HTTP packet in the list
 3. Right-click → **Follow → TCP Stream**
+<img width="525" height="370" alt="Screenshot 2026-07-15 at 01 10 39" src="https://github.com/user-attachments/assets/f13949a3-aa52-46a0-b1a0-2af2999af874" />
+
+   
 4. Wireshark reassembles every packet from that connection into a readable conversation — **red text** is the browser's request, **blue text** is the server's response
+
+<img width="443" height="320" alt="Screenshot 2026-07-15 at 01 11 09" src="https://github.com/user-attachments/assets/b7d010fb-c2b0-44ac-a14a-ed2523b6dd2d" />
+
 
 > This is how incident responders reconstruct what happened during a network event. Individual packets are fragments; the stream view is the complete conversation — what was transferred, what was sent, what the server returned.
 
